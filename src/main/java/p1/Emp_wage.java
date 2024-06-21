@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class Emp_wage
 {
-    public static void main(String[] args) {
-
+    public static void main(String[] args)
+    {
         final int FULL_TIME=1;
         final int PART_TIME=2;
         final int EMP_RATE_PER_HR=250;
@@ -16,17 +16,17 @@ public class Emp_wage
         Random r=new Random();
 
         int check=r.nextInt(0,3);
-        if(check==FULL_TIME)
+        switch (check)
         {
-            empHrs=8;
-        }
-        else if(check==PART_TIME)
-        {
-            empHrs=4;
-        }
-        else
-        {
-            empHrs=0;
+            case FULL_TIME :
+                empHrs=8;
+                break;
+            case PART_TIME:
+                empHrs=4;
+                break;
+            default://0 for absent
+                empHrs=0;
+                break;
         }
         empWage=empHrs*EMP_RATE_PER_HR;
         System.out.println("Employee wage="+empWage);
