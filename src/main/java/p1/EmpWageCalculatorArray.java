@@ -1,29 +1,39 @@
 package p1;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Random;
 
-public class EmpWageCalculatorArray
+public class EmpWageCalculatorArray implements Method_Interface
 {
     final int FULL_TIME=1;
     final int PART_TIME=1;
 
-    private int no_of_company=0;
+        LinkedList<Company> companyEmpWageList;
+        HashMap<String,Company> companyToEmpWage;
+//    private int no_of_company=0;
+//    private Company []companyarr;
 
-    private Company []companyarr;
-
-    public EmpWageCalculatorArray() {
-        this.companyarr = new Company[5];
+    public EmpWageCalculatorArray()
+    {
+        this.companyEmpWageList = new LinkedList<Company>();
+        this.companyToEmpWage = new HashMap<String,Company>();
     }
     public void addCompanyEmpWage(String cname,int ratePerHr,int maxWorkingDay,int maxWorkingHr)
     {
-        companyarr[no_of_company]=new Company(cname,ratePerHr,maxWorkingDay,maxWorkingHr);
-        no_of_company++;
+        Company obj=new Company(cname,ratePerHr,maxWorkingDay,maxWorkingHr);
+        companyEmpWageList.addLast(obj);
+        companyToEmpWage.put(cname,obj);
     }
     public void CalculateEmpWage()
     {
-        for(int i=0;i<no_of_company;i++) {
-            companyarr[i].setTotalEmpWage(CalculateEmpWage(companyarr[i]));
+        for(Company ob:companyEmpWageList)
+        {
+            ob.setTotalEmpWage(CalculateEmpWage(ob));
+            System.out.println(ob.toString());
         }
     }
+
+
     public int CalculateEmpWage(Company c)
     {
         int emphr=0,hrWorked=0,dayWorked=0;
@@ -52,5 +62,10 @@ public class EmpWageCalculatorArray
         return c.totalEmpWage;
 
     }
-}
+    @Override
+    public int getTotalWage(String cName) {
 
+        return companyToEmpWage.get(cName).totalEmpWage;
+
+    }
+}
