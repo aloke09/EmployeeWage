@@ -41,4 +41,8 @@ public class Emp_wage
 //        System.out.println("Total employee wage "+totalEmpWage);
         return totalEmpWage;
     }
+    public static void main(String[] args) {
+        Emp_wage ob1=new Emp_wage();
+        System.out.println("Total wage of Employee "+ob1.computeEmpWage());
+    }
 }
