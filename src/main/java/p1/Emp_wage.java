@@ -4,45 +4,40 @@ import java.util.Random;
 
 public class Emp_wage
 {
-
+    //UC8
     final  int FULL_TIME=1;
     final  int PART_TIME=2;
-    final int EMP_RATE_PER_HR=250;
-    final int TOTAL_NO_OF_WORKING_DAYS=20;
-    final int MAX_HRS_IN_MONTH=100;
 
-    public int computeEmpWage()
+    public int computeEmpWage(String cName,int ratePerHr,int max_no_of_working_day,int max_no_of_hrs)
     {
-        int empHrs=0,no_of_days_worked=0;
-        int totalWorkingHR=0;
+        int daysWorked=0;
+        int hrWorked=0;
+        int emphr=0;
         Random r=new Random();
-        int check=0;
-        while(totalWorkingHR<MAX_HRS_IN_MONTH && no_of_days_worked<TOTAL_NO_OF_WORKING_DAYS)
+        int check;
+
+        while(hrWorked<max_no_of_hrs && daysWorked<max_no_of_working_day)
         {
-            no_of_days_worked++;
+            daysWorked++;
             check=r.nextInt(0,3);
             switch (check)
             {
-                case FULL_TIME :
-                    empHrs=8;
-                    break;
-                case PART_TIME:
-                    empHrs=4;
-                    break;
-                default://0 for absent
-                    empHrs=0;
-//                    break;
+                case FULL_TIME->emphr=8;
+                case PART_TIME->emphr=4;
+                default -> emphr=0;
             }
-            totalWorkingHR=totalWorkingHR+empHrs;
-            System.out.println("Day "+no_of_days_worked+" hour "+empHrs);
+            hrWorked+=emphr;
+            System.out.println("Day "+daysWorked+" hours "+emphr);
+
         }
-        System.out.println("Total working hours ->"+totalWorkingHR);
-        int totalEmpWage=totalWorkingHR*EMP_RATE_PER_HR;
-//        System.out.println("Total employee wage "+totalEmpWage);
+        System.out.println("Total working hours ->"+hrWorked);
+        int totalEmpWage=hrWorked*ratePerHr;
+        System.out.println("Total employee wage for "+cName+" is "+totalEmpWage);
         return totalEmpWage;
     }
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Emp_wage ob1=new Emp_wage();
-        System.out.println("Total wage of Employee "+ob1.computeEmpWage());
+        ob1.computeEmpWage("Bridgelabz", 200, 25, 120);
     }
 }
