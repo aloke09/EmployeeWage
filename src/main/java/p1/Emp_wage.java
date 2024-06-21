@@ -4,22 +4,30 @@ import java.util.Random;
 
 public class Emp_wage
 {
-    //UC8
+    //UC9
     final  int FULL_TIME=1;
     final  int PART_TIME=2;
 
-    public int computeEmpWage(String cName,int ratePerHr,int max_no_of_working_day,int max_no_of_hrs)
-    {
-        int daysWorked=0;
-        int hrWorked=0;
-        int emphr=0;
-        Random r=new Random();
-        int check;
+    private String cName;
+    private int ratePerHr;
+    private int MaxHr;
+    private int MaxDay;
+    private int totalEmpWage;
 
-        while(hrWorked<max_no_of_hrs && daysWorked<max_no_of_working_day)
+    public Emp_wage(String cName, int maxDay, int maxHr, int ratePerHr) {
+        this.cName = cName;
+        MaxDay = maxDay;
+        MaxHr = maxHr;
+        this.ratePerHr = ratePerHr;
+    }
+    public int calculate_wage()
+    {
+        int emphr=0,hrWorked=0,dayWorked=0;
+        while (hrWorked<MaxHr && dayWorked<MaxDay)
         {
-            daysWorked++;
-            check=r.nextInt(0,3);
+            dayWorked++;
+            Random r=new Random();
+            int check = r.nextInt(0, 3);
             switch (check)
             {
                 case FULL_TIME->emphr=8;
@@ -27,17 +35,21 @@ public class Emp_wage
                 default -> emphr=0;
             }
             hrWorked+=emphr;
-            System.out.println("Day "+daysWorked+" hours "+emphr);
-
+            System.out.println("Day "+dayWorked+" hours "+emphr);
         }
-        System.out.println("Total working hours ->"+hrWorked);
-        int totalEmpWage=hrWorked*ratePerHr;
-        System.out.println("Total employee wage for "+cName+" is "+totalEmpWage);
+        totalEmpWage=hrWorked*ratePerHr;
+        System.out.println("Total employee wage for comppany :"+cName+" is "+totalEmpWage);
         return totalEmpWage;
+    }
+    public String display()
+    {
+        return "Total employee wage for comppany :"+cName+" is "+totalEmpWage;
     }
     public static void main(String[] args)
     {
-        Emp_wage ob1=new Emp_wage();
-        ob1.computeEmpWage("Bridgelabz", 200, 25, 120);
+        Emp_wage samsung=new Emp_wage("samsung",25,100,200);
+        samsung.calculate_wage();
+        System.out.println(samsung.display());
+
     }
 }
